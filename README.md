@@ -11,7 +11,8 @@ Working: players (birthday/age, playing hand, injuries, notes, active/paused, se
 groups (members, newsletter by email with all addresses in BCC), attendance (present / excused / absent per training; trainings come from
 BadPlan’s dates and weekly slots or are created here), stats per group and period (“often absent lately”), A4 print of attendance lists
 (never with phone numbers or emails), Dropbox sync, tour, German/English, light/dark.
-Later: guests and trial training, teams and match days; BadPlan reading players/groups from BadTeam.
+BadPlan reads groups, players (without contact data) and attendance from `badteam-daten.json` and uses the number present for its court check.
+Later: guests and trial training, teams and match days.
 
 ## How it works with BadPlan
 - BadTeam owns players and groups. Groups that exist only in BadPlan are taken over once with the same id, so BadPlan’s dates and slots still match.
