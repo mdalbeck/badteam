@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>BadTeam</title>
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="description" content="BadTeam – Spieler, Gruppen und Anwesenheit im Badminton-Training">
+  <meta name="apple-mobile-web-app-title" content="BadTeam">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Farbschema früh setzen (kein Aufblitzen): auto | light | dark
+    try { const t = localStorage.getItem('badteam-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#/"><span class="brand-mark" data-icon="logo"></span><span class="brand-name">Bad<b>Team</b></span></a>
+    <nav id="nav"></nav>
+    <button id="keys-btn" class="ib theme-btn keys-btn"><i data-icon="keyboard"></i></button>
+    <a id="backup-btn" class="ib theme-btn" href="#/backup"></a>
+    <button id="lang-btn" class="ib theme-btn"></button>
+    <button id="theme-btn" class="ib theme-btn"></button>
+    <button id="help-btn" class="ib theme-btn help-btn"><span data-icon="help"></span></button>
+  </header>
+  <div id="banner" class="banner hidden"></div>
+  <main id="view"></main>
+  <dialog id="dlg"></dialog>
+  <div id="toast" class="toast hidden"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

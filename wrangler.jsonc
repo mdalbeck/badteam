@@ -1,0 +1,9 @@
+// Cloudflare Workers: BadTeam ist eine reine statische Seite (kein Server-Code).
+// Jeder Push auf main wird von Cloudflare mit `npx wrangler deploy` veröffentlicht.
+{
+  "name": "badteam",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "."
+  }
+}
