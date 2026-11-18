@@ -10,7 +10,7 @@ import { printView } from './print.js';
 import * as Sync from './sync.js';
 import * as BP from './badplan.js';
 import { startTour, isTourOpen } from './tour.js';
-import { mountSwitcher } from './family.js';
+import { mountSwitcher, hideBoot } from './family.js';
 
 // ================= Hilfsfunktionen =================
 const root = () => $('#view');
@@ -347,6 +347,7 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
   const synced = Sync.init({ message: toast }); // vor route(): räumt die Adresse nach der Dropbox-Anmeldung auf
   window.addEventListener('hashchange', route);
   route();
+  hideBoot();
   updateChrome();
   synced.then(() => BP.init({ adopted: (n) => toast(t('gr.adopted', { n })) }));
   // Beim allerersten Besuch einmal von selbst starten (nicht, wenn schon Daten da sind)

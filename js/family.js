@@ -14,7 +14,7 @@ export const APPS = [
   { id: 'free1', color: '#2ee69b', free: true, text: { de: 'Platz für eine neue App', en: 'Room for a new app' } },
   { id: 'badmove', name: 'BadMove', color: '#22d3ee', glyph: 'zigzag',
     text: { de: 'Laufwege und Footwork-Muster', en: 'Footwork patterns' } },
-  { id: 'badteam', name: 'BadTeam', color: '#4f7bff', glyph: 'team',
+  { id: 'badteam', name: 'BadTeam', color: '#4f7bff', glyph: 'team', url: 'https://badteam.mpdalbeck.workers.dev/',
     text: { de: 'Gruppen, Anwesenheit, Mannschaften', en: 'Groups, attendance, teams' } },
   { id: 'badfit', name: 'BadFit', color: '#b07cff', glyph: 'pulse',
     text: { de: 'Athletik, Kraft und Prehab', en: 'Fitness, strength and prehab' } },
@@ -70,7 +70,26 @@ export function dots(size, bg = false) {
   return `<svg viewBox="-100 -100 200 200" width="${size}" height="${size}" aria-hidden="true">${bg ? `<rect x="-100" y="-100" width="200" height="200" rx="44" fill="${INK}"/>` : ''}${d}</svg>`;
 }
 
+// Ladekreis: das Punkte-Logo dreht sich, die Punkte pulsieren nacheinander
+export function loader(size = 40) {
+  const n = APPS.length;
+  let k = 0;
+  const d = APPS.map((app, i) => {
+    if (app.free) return '';
+    const a = (i * 2 * Math.PI) / n;
+    return `<circle cx="${(62 * Math.sin(a)).toFixed(1)}" cy="${(-62 * Math.cos(a)).toFixed(1)}" r="21" fill="${app.color}" style="animation-delay:${(k++ * 0.12).toFixed(2)}s"/>`;
+  }).join('');
+  ensureCss();
+  return `<svg class="bf-loader" viewBox="-100 -100 200 200" width="${size}" height="${size}" role="img" aria-label="…">${d}</svg>`;
+}
+
 const CSS = `
+.bf-loader { animation: bf-spin 1.6s linear infinite; }
+.bf-loader circle { transform-box: fill-box; transform-origin: center; animation: bf-pulse 1.2s ease-in-out infinite; }
+@keyframes bf-spin { to { transform: rotate(360deg); } }
+@keyframes bf-pulse { 0%, 100% { transform: scale(.65); opacity: .55; } 40% { transform: scale(1); opacity: 1; } }
+.bf-loading { display: flex; align-items: center; gap: 12px; color: var(--muted, #95a0ae); }
+@media (prefers-reduced-motion: reduce) { .bf-loader, .bf-loader circle { animation-duration: 3s; } }
 .bf-wrap { position: relative; display: flex; margin-left: 2px; }
 .bf-btn { width: 38px; height: 38px; padding: 0; display: grid; place-items: center; background: transparent; border: 0; border-radius: 10px; cursor: pointer; transition: transform .2s; }
 .bf-btn:hover { background: var(--surface2, rgb(127 127 127 / .12)); }
@@ -95,6 +114,23 @@ a.bf-it:hover { background: var(--surface2, #1b1f26); }
 @media (prefers-reduced-motion: reduce) { .bf-btn svg, .bf-pop { transition: none; } }
 `;
 
+let cssDone = false;
+function ensureCss() {
+  if (cssDone || typeof document === 'undefined') return;
+  cssDone = true;
+  const style = document.createElement('style');
+  style.textContent = CSS;
+  document.head.append(style);
+}
+
+/** Startbildschirm (#boot in index.html) ausblenden, sobald die App steht */
+export function hideBoot() {
+  const b = document.getElementById('boot');
+  if (!b) return;
+  b.classList.add('done');
+  setTimeout(() => b.remove(), 300);
+}
+
 /**
  * Hängt den Wechsel-Knopf ans Ende der Kopfzeile.
  * @param {object} o  current: App-ID, header: Element, lang: () => 'de' | 'en'
@@ -103,9 +139,7 @@ export function mountSwitcher({ current, header = document.querySelector('header
   if (!header) return;
   const old = header.querySelector('.bf-wrap');
   if (old) return old.bfRender(); // erneut aufgerufen (z. B. Sprache gewechselt): nur Texte auffrischen
-  const style = document.createElement('style');
-  style.textContent = CSS;
-  document.head.append(style);
+  ensureCss();
 
   const wrap = document.createElement('div');
   wrap.className = 'bf-wrap';
