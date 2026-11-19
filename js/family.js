@@ -1,5 +1,5 @@
 // Bad-Apps-Familie: App-Wechsler (kleiner Kreis-Knopf oben rechts).
-// Diese Datei ist in allen Bad Apps gleich (BadClip, BadPlan, BadTeam, BadPlayer, Startseite) – bei Änderungen überall kopieren.
+// Diese Datei ist in allen Bad Apps gleich (BadClip, BadPlan, BadTeam, BadScout, BadPlayer, Startseite) – bei Änderungen überall kopieren.
 
 export const HOME_URL = 'https://badapps.mpdalbeck.workers.dev/';
 
@@ -11,7 +11,8 @@ export const APPS = [
     text: { de: 'Spielstand, Turniere, Ranglisten', en: 'Scores, tournaments, rankings' } },
   { id: 'badplan', name: 'BadPlan', color: '#c6f432', glyph: 'clock', url: 'https://badplan.mpdalbeck.workers.dev/',
     text: { de: 'Trainings planen und in der Halle durchführen', en: 'Plan sessions and run them in the hall' } },
-  { id: 'free1', color: '#2ee69b', free: true, text: { de: 'Platz für eine neue App', en: 'Room for a new app' } },
+  { id: 'badscout', name: 'BadScout', color: '#2ee69b', glyph: 'lens', url: 'https://badscout.mpdalbeck.workers.dev/',
+    text: { de: 'Spiele analysieren', en: 'Analyse matches' } },
   { id: 'badmove', name: 'BadMove', color: '#22d3ee', glyph: 'zigzag',
     text: { de: 'Laufwege und Footwork-Muster', en: 'Footwork patterns' } },
   { id: 'badteam', name: 'BadTeam', color: '#4f7bff', glyph: 'team', url: 'https://badteam.mpdalbeck.workers.dev/',
@@ -37,6 +38,7 @@ export function glyph(app) {
     case 'zigzag': return `<path d="M-52 42L-16 -6L14 22L48 -30" ${st}/><path d="M18 -36H52V-2" ${st}/>`;
     case 'pulse': return `<path d="M-64 4H-34L-15 -40L8 44L27 4H64" ${st} stroke-width="19"/>`;
     case 'player': return `<g fill="${INK}"><circle cx="0" cy="-28" r="25"/><path d="M-47 52a47 47 0 0 1 94 0z"/></g>`;
+    case 'lens': return `<circle cx="-12" cy="-12" r="34" ${st}/><path d="M13 13L46 46" fill="none" stroke="${INK}" stroke-width="26" stroke-linecap="round"/>`;
     case 'team': return `<g fill="${INK}"><circle cx="-40" cy="16" r="21"/><circle cx="40" cy="16" r="21"/><circle cx="0" cy="-26" r="23"/></g>`;
   }
   return `<path d="M0 -38V38M-38 0H38" fill="none" stroke="${app.color}" stroke-width="18" stroke-linecap="round"/>`;
