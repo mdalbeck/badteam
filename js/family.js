@@ -18,7 +18,7 @@ export const APPS = [
     text: { de: 'Gruppen, Anwesenheit, Mannschaften', en: 'Groups, attendance, teams' } },
   { id: 'badfit', name: 'BadFit', color: '#b07cff', glyph: 'pulse',
     text: { de: 'Athletik, Kraft und Prehab', en: 'Fitness, strength and prehab' } },
-  { id: 'badplayer', name: 'BadPlayer', color: '#ff4fd8', glyph: 'player', url: 'https://badmplayer.mpdalbeck.workers.dev/',
+  { id: 'badplayer', name: 'BadPlayer', color: '#ff4fd8', glyph: 'player', url: 'https://badplayer.mpdalbeck.workers.dev/',
     text: { de: 'Tagebuch, Aufgaben und Clips für Spieler', en: 'Diary, tasks and clips for players' } },
 ];
 

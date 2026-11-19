@@ -1,5 +1,5 @@
 // Einfacher Service Worker: App-Hülle offline verfügbar (Netzwerk zuerst, Cache als Rückfall).
-const CACHE = 'bt-shell-v3';
+const CACHE = 'bt-shell-v4';
 const SHELL = ['./', 'index.html', 'styles.css', 'js/app.js', 'js/store.js', 'js/icons.js', 'js/i18n.js', 'js/ui.js', 'js/players.js', 'js/groups.js', 'js/trainings.js', 'js/stats.js', 'js/print.js', 'js/badplan.js', 'js/sync.js', 'js/dropbox.js', 'js/config.js', 'js/tour.js', 'js/family.js', 'manifest.webmanifest', 'icon.svg'];
 
 self.addEventListener('install', (e) => {
